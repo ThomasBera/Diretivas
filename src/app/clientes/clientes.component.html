@@ -1,0 +1,56 @@
+<div class="container">
+  <!-- Tabela de Clientes -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">E-mail</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of clientes">
+        <td>{{ cli.nome }}</td>
+        <td>{{ cli.email }}</td>
+        <td>{{ cli.cidade }}</td>
+        <td>
+          <!-- Botão para Editar -->
+          <button class="btn btn-warning btn-sm mr-2 ml-2" (click)="editarCliente(cli)">Editar</button>
+          <!-- Botão para Excluir -->
+          <button class="btn btn-danger btn-sm mr-2 ml-2" (click)="excluirCliente(cli.id)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Formulário para Adicionar ou Editar Cliente -->
+  <form (ngSubmit)="salvarCliente()" #clienteForm="ngForm">
+    <h3>{{ editando ? 'Editar Cliente' : 'Novo Cliente' }}</h3>
+    
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" [(ngModel)]="clienteSelecionado.nome" name="nome" class="form-control" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" [(ngModel)]="clienteSelecionado.email" name="email" class="form-control" required />
+    </div>
+    
+    <div class="form-group">
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" [(ngModel)]="clienteSelecionado.cidade" name="cidade" class="form-control" required />
+    </div>
+
+    <!-- Outros campos como telefone, celular, cep, etc. -->
+    <!-- Exemplo: -->
+    <div class="form-group">
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" [(ngModel)]="clienteSelecionado.telefone" name="telefone" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ editando ? 'Salvar Alterações' : 'Adicionar Cliente' }}</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelarEdicao()" *ngIf="editando">Cancelar</button>
+  </form>
+</div>

@@ -1,0 +1,7 @@
+<footer>
+  <p *ngIf="usuarioLogado">
+    Logado como: {{ usuarioLogado.nome }} ({{ usuarioLogado.email }})
+  </p>
+  <p *ngIf="!usuarioLogado">Nenhum usuário logado.</p>
+</footer>
+
